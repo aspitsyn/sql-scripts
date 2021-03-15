@@ -1,2 +1,2 @@
 # sql-scripts
-SQL DBA scripts 
+Oracle DBA SQL scripts 
