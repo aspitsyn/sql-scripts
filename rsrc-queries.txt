@@ -1,0 +1,23 @@
+SQL> SELECT CONSUMER_GROUP FROM DBA_RSRC_GROUP_MAPPINGS WHERE ATTRIBUTE='ORACLE_USER' AND VALUE='AIS3';
+CONSUMER_GROUP
+------------------------------
+AISDB_GROUP
+
+SQL> SELECT CONSUMER_GROUP FROM DBA_RSRC_GROUP_MAPPINGS WHERE ATTRIBUTE='ORACLE_USER' AND VALUE='AIS3';
+
+CONSUMER_GROUP
+------------------------------
+AISDB_GROUP
+
+SQL> select group_or_subplan, switch_group, switch_time from  DBA_RSRC_PLAN_DIRECTIVES where plan='AIS3_WORK_PLAN' and group_or_subplan ='AISDB_GROUP';
+
+GROUP_OR_SUBPLAN               SWITCH_GROUP         SWITCH_TIME
+------------------------------ -------------------- -----------
+AISDB_GROUP                    LOW_GROUP             120
+
+
+SQL> select group_or_subplan,cpu_p4,parallel_degree_limit_p1,comments from  DBA_RSRC_PLAN_DIRECTIVES where plan='AIS3_WORK_PLAN' and group_or_subplan ='LOW_GROUP';
+
+GROUP_OR_SUBPLAN              CPU_P4 PARALLEL_DEGREE_LIMIT_P1 COMMENTS
+------------------------- ---------- ------------------------ -------------------------------------------------
+LOW_GROUP                         70               1		  Directive for  AIS3 long/low-priority operations
