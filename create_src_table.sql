@@ -1,7 +1,7 @@
 set timing on
 
 CREATE TABLE hr.big_table
-tablespace GNIVC_DATA
+tablespace HR_DATA
 AS
 SELECT 1 employee_id
      , 'Mr' first_name
