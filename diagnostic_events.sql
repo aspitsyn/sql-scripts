@@ -42,7 +42,7 @@ alter system set events
 
 alter system set events 'kg_event off';
 
-SELECT s.sid, p.spid, p.tracefile FROM   v$session s JOIN v$process p ON s.paddr = p.addr WHERE  s.sid = (select distinct sid from v$mystat);
+SELECT s.sid, s.serial#, p.spid, p.tracefile FROM   v$session s JOIN v$process p ON s.paddr = p.addr WHERE  s.sid = (select distinct sid from v$mystat);
 
 SELECT s.sid, p.spid, p.tracefile FROM   gv$session s JOIN gv$process p ON s.paddr = p.addr AND s.inst_id = p.inst_id WHERE s.inst_id = 3 AND s.sid = 5053 AND s.serial# = 29282;
 

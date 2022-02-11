@@ -18,7 +18,7 @@ column filename new_val filename;
 set veri off;
 set feed off;
 
-select '/tmp/sqlmon_' || '&&1' || '_' || '&&3' || '_&instname'||'_'||to_char(SYSDATE,'YYYYMMDD_HH24MI')||'.html' filename from dual;
+select '/tmp/sqlmon_' || '&&1' || '_' || '&&3' || '_&instname'||'_'||to_char(SYSDATE,'YYYYMMDD_HH24MI')||'.txt' filename from dual;
 
 spool &filename;
 select 
@@ -30,7 +30,7 @@ select
         --session_id=>-1,
 		sql_exec_id=> '&&3',
         inst_id => '&&2',
-        type=>'Active'
+        type=>'TEXT'
     ) 
     from dual;
 spool off
