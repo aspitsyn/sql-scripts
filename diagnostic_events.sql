@@ -66,6 +66,8 @@ oradebug setmypid
 oradebug unlimit
 oradebug hanganalyze 3
 
+alter session set NLS_DATE_FORMAT='YYYY.MM.DD HH24:MI:SS';
+
 
 alter system set events '6550 trace name errorstack level 3';
 alter system set events '6550 trace name errorstack off';
