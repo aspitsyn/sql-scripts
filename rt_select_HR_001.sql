@@ -10,6 +10,7 @@ alter session set optimizer_index_cost_adj = 100;
 --alter session set sqltune_category='TEST';
 --alter session set events '10046 trace name context forever, level 12';
 --alter session set events 'sql_trace bind=true, wait=true, level=12'; 
+--alter session set events 'trace[sql_mon.*] disk=high,memory=high,get_time=highres';
 
 VAR B1 NUMBER;
 VAR B2 NUMBER;

@@ -57,7 +57,7 @@ oradebug short_stack
 --Attach and get errorstack of the blocking process
 sqlplus
 connect / as sysdba
-oradebug setospid <process ID>
+oradebug setospid 320935
 oradebug unlimit
 oradebug dump errorstack 3 
 
@@ -123,3 +123,23 @@ from gv$transaction a,gv$session b,dba_objects c
 where a.inst_id=b.inst_id and a.addr=b.taddr and a.start_date<sysdate-1/24
 and row_wait_obj#=object_id(+)
 order by a.start_date; 
+
+set linesize 160 pagesize 200
+col RECORD_ID for 9999999 head ID
+col ORIGINATING_TIMESTAMP for a20 head Date
+col MESSAGE_TEXT for a120 head Message
+select 
+    record_id,
+    to_char(originating_timestamp,'DD.MM.YYYY HH24:MI:SS'),
+    message_text 
+from 
+    x$dbgalertext
+WHERE originating_timestamp > (sysdate - INTERVAL '10' minute)
+    ORDER BY record_id;
+
+select PAYLOAD
+  from   V$DIAG_TRACE_FILE_CONTENTS
+    where  TRACE_FILENAME = 'orcl12c_ora_4163.trc'
+    order by LINE_NUMBER;
+
+select final_blocking_session_status,final_blocking_instance,final_blocking_session,event,count(*) from gv$session where final_blocking_session is not null /* and sql_id in ('401xa9y7c51ky') */ group by final_blocking_session_status,final_blocking_instance,final_blocking_session,event;
